@@ -43,7 +43,7 @@ New keystore: new.jks created with updated alias: "jims self-signed cert"
 
 Step 3: Use Keytool to verify the new keystore contains a modified alias.
 
-C:\tmp\ChangeWeirdCertAlias>keytool -keystore new.jks -list
+C:\tmp\ChangeCertAlias>keytool -keystore new.jks -list
 Enter keystore password:
 Keystore type: jks
 Keystore provider: SUN
