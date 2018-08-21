@@ -1,0 +1,55 @@
+Sample run of application
+-------------------------
+
+This NetBeans project includes a simple keystore called my.jks. It has one
+self-signed certificate where its associated alias contains a weird character.
+In this case it's:
+
+   "jim?s self-signed cert"
+
+The '?' character is actually represented in hexadecimal as '\u0219'.
+
+Step 1: Use keytool to print the alias
+
+C:\tmp\ChangeWeirdCertAlias>keytool -keystore my.jks -list
+Enter keystore password: changeit
+Keystore type: jks
+Keystore provider: SUN
+
+Your keystore contains 1 entry
+
+jim?s self-signed cert, Aug 14, 2018, PrivateKeyEntry,
+Certificate fingerprint (SHA1): D6:24:1F:4B:82:ED:B5:83:BC:67:89:CA:14:AE:12:7F:
+CB:F4:0F:B1
+
+
+Step 2: Run the ChangeCertAlias program to modify the alias.  In this case
+we'll get rid of the '\u2019' character.  The program will prompt the user for
+input.  Passwords for the sample key and keystore are the same: "changeit".
+
+C:\tmp\ChangeCertAlias>java -jar dist\ChangeCertAlias.jar
+
+Keystore file: my.jks
+Enter keystore password: changeit
+
+Aliases in my.jks
+        1: jim?s self-signed cert
+Select an alias number: 1
+Enter the new certificate alias: jims self-signed cert
+Name of new keystore file: new.jks
+Enter key password: changeit
+New keystore: new.jks created with updated alias: "jims self-signed cert"
+
+
+Step 3: Use Keytool to verify the new keystore contains a modified alias.
+
+C:\tmp\ChangeWeirdCertAlias>keytool -keystore new.jks -list
+Enter keystore password:
+Keystore type: jks
+Keystore provider: SUN
+
+Your keystore contains 1 entry
+
+jims self-signed cert, Aug 14, 2018, PrivateKeyEntry,
+Certificate fingerprint (SHA1): D6:24:1F:4B:82:ED:B5:83:BC:67:89:CA:14:AE:12:7F:
+CB:F4:0F:B1
