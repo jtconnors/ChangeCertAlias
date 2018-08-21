@@ -11,7 +11,7 @@ The '?' character is actually represented in hexadecimal as '\u0219'.
 
 Step 1: Use keytool to print the alias
 
-C:\tmp\ChangeWeirdCertAlias>keytool -keystore my.jks -list
+C:\tmp\ChangeCertAlias>keytool -keystore my.jks -list
 Enter keystore password: changeit
 Keystore type: jks
 Keystore provider: SUN
